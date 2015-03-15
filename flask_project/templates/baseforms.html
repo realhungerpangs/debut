@@ -1,0 +1,22 @@
+{% include "base2.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="row">
+<div class="col-sm-1">
+</div>
+<div class="col-sm-10 well" style="background-color: #ffffff">
+<div class="container">
+<div class="row">
+<div class="col-sm-12">
+{% block body %}
+
+{% endblock %}
+
+</div>
+</div>
+</div>
+</div>
+<div class="col-sm-1">
+</div>
+</div>
+{% endblock %}
