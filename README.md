@@ -1,1 +1,1 @@
-this is a almost blank readme
+currently there are two users: ubuntu and achal
