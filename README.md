@@ -1,1 +1,1 @@
-currently there are two users: ubuntu and achal
+currently there are three users: ubuntu, achal and manas
