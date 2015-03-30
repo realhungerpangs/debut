@@ -7,6 +7,7 @@ from werkzeug.contrib.fixers import ProxyFix
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
 import forms
 import user
+import signuplist
 
 
 app = Flask(__name__)
@@ -32,7 +33,14 @@ def signup():
     if request.method == 'POST':
         form = forms.SignupForm(request.form)
         if form.validate():
-            return redirect('/')
+            status = signuplist.add_user(username=request.form['username'],
+                                first_name=request.form['firstname'],
+                                last_name=request.form['lastname'])
+            if status == 'AlreadyExists':
+                flash('Congratulations you already existed in the system')
+            if status == 'UserAdded':
+                flash('You have successfully signed up')
+            # return redirect('/')
         else:
             return render_template('signup.html', form = form)
     return render_template('signup.html', form = forms.SignupForm())
@@ -45,11 +53,14 @@ def names():
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
+
+# Load the user from the database here. Currently only test user.
 @login_manager.user_loader
 def load_user(userid):
     print 'this is executed',userid
     test_user = user.User()
     test_user.username="johndoe"
+    test_user.nickname="John Doe"
     return test_user
 
 @app.errorhandler(404)
@@ -71,6 +82,23 @@ def login():
             return redirect(url_for('signup'))
     if request.method == "GET":
         return render_template('login.html', form = forms.LoginForm())
+
+# User Profile Page
+@app.route('/user/<nickname>')
+@login_required
+def user(nickname):
+    user = "JohnDoe" #User.query.filter_by(nickname=nickname).first()
+    if user == None:
+        flash('User %s not found.' % nickname)
+        return redirect(url_for('index'))
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html',
+                           user=user,
+                           posts=posts)
+
 
 if __name__ == '__main__':
     Bootstrap(app)

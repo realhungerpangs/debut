@@ -1,6 +1,14 @@
 {% extends "baseforms.html" %}
 {% block body %}
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
  <form action="{{url_for('signup')}}" class="form-horizontal" method="POST">
 
         <div class="heading">
@@ -15,22 +23,22 @@
         {{ form.username.errors[0] }}
 
         </div>
-        <div class="form-group {% if form.password.errors %} has-error {% endif %}">
-        {{form.password.label(class="col-sm-4")}}
+        <div class="form-group {% if form.firstname.errors %} has-error {% endif %}">
+        {{form.firstname.label(class="col-sm-4")}}
         <div class="col-sm-3">
-        {{ form.password(placeholder="Min. 6 Characters", class="form-control") }}
+        {{ form.firstname(placeholder="Min. 6 Characters", class="form-control") }}
         </div>
         <p class="col-sm-5 help-block">
-        {{ form.password.errors[0] }}
+        {{ form.firstname.errors[0] }}
 
         </div>
-        <div class="form-group {% if form.confirm.errors %} has-error {% endif %}">
-        {{form.confirm.label(class="col-sm-4")}}
+        <div class="form-group {% if form.lastname.errors %} has-error {% endif %}">
+        {{form.lastname.label(class="col-sm-4")}}
         <div class="col-sm-3">
-        {{form.confirm(placeholder="E.g. ashwinhegde", class="form-control")}}
+        {{form.lastname(placeholder="E.g. ashwinhegde", class="form-control")}}
         </div>
         <p class="col-sm-5 help-block">
-        {{ form.confirm.errors[0] }}
+        {{ form.lastname.errors[0] }}
         </div>
 
         <div class="form-group {% if form.agree.errors %} has-error {% endif %}">
@@ -41,6 +49,7 @@
         {{ form.agree.errors[0] }}
         </div>
         <button class="btn btn-success" type="submit">Sign Up</button>
+
 </form>
 
 {% endblock %}

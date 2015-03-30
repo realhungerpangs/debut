@@ -11,11 +11,14 @@ class LoginForm(Form):
 
 class SignupForm(Form):
     username = StringField('Username(email)', [validators.email()])
+    firstname = StringField('First Name')
+    lastname = StringField('Last Name')
+    agree = BooleanField('Send me updates', [validators.required()])
+
+class RegistrationForm(Form):
+    username = StringField('Username(email)', [validators.email()])
     password = PasswordField('New Password',
                              [validators.required(),
                               validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password')
     agree = BooleanField('I accept the TOS', [validators.required()])
-
-class RegistrationForm(Form):
-    name = StringField('name', validators=[DataRequired()])
