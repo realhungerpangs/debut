@@ -1,9 +1,11 @@
 __author__ = 'masawant'
+from boto.dynamodb2.table import Table
 from flask.ext.login import LoginManager, login_user, logout_user, login_required
 
 class User(object):
     username = "Email"
-    password = "Password"
+    lastname = "Doe"
+    firstname = "John"
     id = "12345"
     def is_authenticated(self):
         return True

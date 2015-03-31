@@ -37,10 +37,10 @@ def signup():
                                 first_name=request.form['firstname'],
                                 last_name=request.form['lastname'])
             if status == 'AlreadyExists':
-                flash('Congratulations you already existed in the system')
+                flash('You have already signed up. You must be really waiting!', 'success')
             if status == 'UserAdded':
-                flash('You have successfully signed up')
-            # return redirect('/')
+                flash('You have successfully signed up. All you have to do now is wait!', 'success')
+            return redirect('/')
         else:
             return render_template('signup.html', form = form)
     return render_template('signup.html', form = forms.SignupForm())
