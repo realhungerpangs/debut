@@ -7,8 +7,8 @@ def add_user(username='',first_name='',last_name=''):
     #Open a connection to the Sign Up Table
     conn = boto.dynamodb.connect_to_region(
         'us-west-1',
-        aws_access_key_id='AKIAIG7LQDIVOP5SWXVQ',
-        aws_secret_access_key='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')
+        aws_access_key_id='',
+        aws_secret_access_key='')
     signupListTable = conn.get_table('SignUpList')
     #Check if user already exists
     item = None
