@@ -1,8 +1,0 @@
-# compiled files
-*.pyc
-
-# pycharm files
-.idea/
-
-# config files
-config.py
