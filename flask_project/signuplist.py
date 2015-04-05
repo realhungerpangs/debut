@@ -2,13 +2,17 @@ __author__ = 'masawant'
 __author__ = 'masawant'
 
 import boto.dynamodb
+import config
 
 def add_user(username='',first_name='',last_name=''):
     #Open a connection to the Sign Up Table
+    configDetails = config.access_params['AWS']
+    print configDetails
     conn = boto.dynamodb.connect_to_region(
-        'us-west-1',
-        aws_access_key_id='',
-        aws_secret_access_key='')
+        configDetails['region'],
+        aws_access_key_id=configDetails['key_id'],
+        aws_secret_access_key=configDetails['secret_access_key']
+        )
     signupListTable = conn.get_table('SignUpList')
     #Check if user already exists
     item = None
